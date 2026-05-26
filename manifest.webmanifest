@@ -1,0 +1,16 @@
+{
+  "name": "Desempaquetador",
+  "short_name": "Desempaquetador",
+  "description": "Resuelve anagramas en español. Compatible con Scrabble (FISE) y Apalabrados. Filtros por longitud, comodines, puntuación.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f1115",
+  "theme_color": "#0f1115",
+  "lang": "es",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f1115" />
+
+<title>Desempaquetador · Anagramas en español + Scrabble</title>
+<meta name="description" content="Resuelve anagramas en español al instante. Compatible con Scrabble (FISE) y Apalabrados. Comodines, filtros por longitud, contiene, empieza, acaba y patrón con huecos." />
+<meta name="author" content="Miqui Cussó" />
+<link rel="canonical" href="https://anagramas.example.com/" />
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" href="/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Desempaquetador" />
+<meta property="og:title" content="Desempaquetador · Anagramas en español + Scrabble" />
+<meta property="og:description" content="Resuelve anagramas en español al instante. Compatible con Scrabble (FISE) y Apalabrados. Comodines y filtros avanzados." />
+<meta property="og:url" content="https://anagramas.example.com/" />
+<meta property="og:image" content="https://anagramas.example.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="es_ES" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Desempaquetador · Anagramas en español + Scrabble" />
+<meta name="twitter:description" content="Resuelve anagramas en español al instante. Compatible con Scrabble (FISE) y Apalabrados." />
+<meta name="twitter:image" content="https://anagramas.example.com/og-image.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Desempaquetador",
+  "url": "https://anagramas.example.com/",
+  "description": "Resuelve anagramas en español. Compatible con Scrabble (FISE) y Apalabrados. Comodines y filtros por longitud, contiene, empieza, acaba y patrón.",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "es-ES",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cómo se usan los comodines o fichas en blanco?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Escribe ? (o un espacio) por cada ficha en blanco. El comodín representa cualquier letra y suma 0 puntos, igual que en Scrabble." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué diccionario usa Desempaquetador?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Una lista abierta de más de 600.000 palabras en español, normalizada sin tildes (como las fichas de Scrabble) y conservando la Ñ." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿La puntuación es la de Scrabble oficial?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. El modo Scrabble usa los valores FISE en español. También incluye un modo con los valores de Apalabrados." }
+    }
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="brand">Desempaquetador</a>
+  <nav class="site-nav">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Resuelve anagramas en español al instante</h1>
+    <p class="intro">Escribe tus letras y obtén todas las palabras válidas, ordenadas por puntuación. Modos Scrabble&nbsp;(FISE) y Apalabrados, comodines y filtros avanzados.</p>
+  </section>
+
+  <section class="tool" aria-label="Buscador de anagramas">
+    <form id="solver-form" autocomplete="off" novalidate>
+      <div class="rack">
+        <label for="letters" class="rack-label">Tus letras <span class="hint">(usa <kbd>?</kbd> para un comodín)</span></label>
+        <div class="rack-input">
+          <input
+            id="letters"
+            name="letters"
+            type="text"
+            inputmode="latin"
+            spellcheck="false"
+            autocapitalize="characters"
+            placeholder="ej. casa?to"
+            maxlength="15"
+            aria-describedby="rack-help" />
+          <button type="button" id="clear-btn" class="clear-btn" aria-label="Borrar letras" hidden>&times;</button>
+        </div>
+        <div id="tiles-preview" class="tiles-preview" aria-hidden="true"></div>
+        <p id="rack-help" class="sr-only">Introduce de 1 a 15 letras. El símbolo de interrogación representa una ficha en blanco.</p>
+      </div>
+
+      <div class="mode-row">
+        <span class="mode-label">Puntuación</span>
+        <div class="segmented" role="radiogroup" aria-label="Modo de puntuación">
+          <button type="button" class="seg is-active" data-mode="fise" role="radio" aria-checked="true">Scrabble (FISE)</button>
+          <button type="button" class="seg" data-mode="apal" role="radio" aria-checked="false">Apalabrados</button>
+        </div>
+      </div>
+
+      <details class="filters" id="filters">
+        <summary><span>Filtros avanzados</span></summary>
+        <div class="filters-grid">
+          <div class="field">
+            <label for="f-min">Longitud mín.</label>
+            <input id="f-min" type="number" min="2" max="15" inputmode="numeric" placeholder="2" />
+          </div>
+          <div class="field">
+            <label for="f-max">Longitud máx.</label>
+            <input id="f-max" type="number" min="2" max="15" inputmode="numeric" placeholder="15" />
+          </div>
+          <div class="field">
+            <label for="f-contains">Contiene</label>
+            <input id="f-contains" type="text" spellcheck="false" placeholder="rs" />
+          </div>
+          <div class="field">
+            <label for="f-starts">Empieza por</label>
+            <input id="f-starts" type="text" spellcheck="false" placeholder="ca" />
+          </div>
+          <div class="field">
+            <label for="f-ends">Acaba en</label>
+            <input id="f-ends" type="text" spellcheck="false" placeholder="ón" />
+          </div>
+          <div class="field field-wide">
+            <label for="f-pattern">Patrón <span class="hint">(<kbd>_</kbd> = hueco)</span></label>
+            <input id="f-pattern" type="text" spellcheck="false" placeholder="c_s_" />
+          </div>
+        </div>
+      </details>
+    </form>
+
+    <div id="results" class="results" aria-live="polite">
+      <div id="status" class="status">
+        <span class="spinner" aria-hidden="true"></span>
+        <span id="status-text">Cargando diccionario…</span>
+      </div>
+    </div>
+    <noscript>
+      <p class="empty"><strong>Activa JavaScript para usar el buscador</strong>Desempaquetador resuelve los anagramas en tu propio navegador, sin enviar datos a ningún servidor, por lo que necesita JavaScript activado.</p>
+    </noscript>
+  </section>
+
+  <section id="como-funciona" class="prose">
+    <h2>Cómo funciona</h2>
+    <p>Desempaquetador busca en una lista de más de <strong>600.000 palabras en español</strong> todas las que puedes formar con tus fichas. Funciona como buscador de anagramas y como solucionador para <strong>Scrabble</strong> y <strong>Apalabrados</strong>: introduce tus letras, añade comodines con <kbd>?</kbd> y filtra por longitud, posición o patrón. Cada resultado muestra su puntuación según el modo elegido. Todo ocurre en tu navegador, sin enviar nada a ningún servidor.</p>
+  </section>
+
+  <section id="faq" class="prose">
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Cómo se usan los comodines?</h3>
+    <p>Escribe <kbd>?</kbd> (o un espacio) por cada ficha en blanco. El comodín representa cualquier letra y suma 0 puntos, igual que en Scrabble.</p>
+    <h3>¿Qué diccionario usa?</h3>
+    <p>Una lista abierta de más de 600.000 palabras en español, normalizada sin tildes (como las fichas reales) y conservando la Ñ.</p>
+    <h3>¿La puntuación es la oficial?</h3>
+    <p>El modo Scrabble usa los valores <strong>FISE</strong> del español. El modo Apalabrados usa los valores habituales de ese juego.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> Desempaquetador · hecho por <a href="https://miquelcusso-rgb.github.io" rel="noopener">miquelcusso</a></p>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
