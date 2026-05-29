@@ -314,6 +314,16 @@
 
   el.form.addEventListener("submit", function (e) { e.preventDefault(); run(); });
 
+  // Pills de ejemplo: rellenan el rack y disparan la búsqueda.
+  Array.prototype.forEach.call(document.querySelectorAll(".pill[data-fill]"), function (p) {
+    p.addEventListener("click", function () {
+      el.letters.value = p.getAttribute("data-fill");
+      el.clear.hidden = false;
+      el.letters.focus();
+      run();
+    });
+  });
+
   // Delegación: copiar palabra al tocarla / mostrar más
   el.results.addEventListener("click", function (e) {
     var more = e.target.closest("#show-more");

@@ -46,7 +46,31 @@ main { max-width: var(--container-max); margin: 0 auto; padding: var(--sp-6) var
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.hero .intro { color: var(--text-muted); font-size: var(--fs-md); max-width: 620px; margin: 0 auto; }
+.hero .intro { color: var(--text-muted); font-size: var(--fs-md); max-width: 640px; margin: 0 auto; }
+.hero .intro strong { color: var(--text); font-weight: 600; }
+.badges {
+  list-style: none; padding: 0; margin: var(--sp-5) auto 0;
+  display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4);
+  justify-content: center; max-width: 640px;
+  font-size: var(--fs-sm); color: var(--text-muted);
+}
+.badges li { display: inline-flex; align-items: center; gap: 6px; }
+.badges .dot {
+  width: 8px; height: 8px; border-radius: var(--r-full);
+  background: var(--success); box-shadow: 0 0 8px rgba(47,191,113,0.5);
+}
+
+/* Ejemplos / pills */
+.examples { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); margin-top: var(--sp-3); }
+.examples-label { font-size: var(--fs-sm); color: var(--text-muted); }
+.pill {
+  border: 1px solid var(--border); background: var(--bg);
+  color: var(--text-muted); padding: 6px 12px; min-height: 32px;
+  border-radius: var(--r-full); font-family: var(--font-mono);
+  font-size: var(--fs-sm); cursor: pointer;
+  transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+}
+.pill:hover { border-color: var(--accent); color: var(--text); background: var(--bg-elevated-2); }
 
 /* ───── Tool card ───── */
 .tool {
@@ -200,8 +224,55 @@ kbd {
 /* ───── Prosa / SEO ───── */
 .prose { max-width: 680px; margin: var(--sp-8) auto 0; }
 .prose h2 { font-family: var(--font-display); margin-bottom: var(--sp-4); }
-.prose h3 { font-size: var(--fs-md); margin-top: var(--sp-5); margin-bottom: var(--sp-2); }
+.prose h3 { font-size: var(--fs-md); margin-top: var(--sp-5); margin-bottom: var(--sp-2); color: var(--text); }
 .prose p { color: var(--text-muted); line-height: var(--lh-relaxed); }
+.prose strong { color: var(--text); }
+
+/* Listas estructuradas (steps, juegos, tips) */
+.steps, .games, .tips { padding: 0; margin: 0 0 var(--sp-4); list-style: none; }
+.steps li, .games li, .tips li {
+  position: relative; padding: var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-7);
+  color: var(--text-muted); line-height: var(--lh-relaxed);
+  border-left: 2px solid var(--border); margin-left: 8px;
+}
+.steps { counter-reset: step; }
+.steps li { counter-increment: step; }
+.steps li::before {
+  content: counter(step); position: absolute; left: -16px; top: var(--sp-3);
+  width: 30px; height: 30px; border-radius: var(--r-full);
+  background: var(--bg-elevated-2); border: 1px solid var(--accent); color: var(--accent);
+  font-family: var(--font-display); font-weight: 700; font-size: var(--fs-sm);
+  display: flex; align-items: center; justify-content: center;
+}
+.games li::before, .tips li::before {
+  content: ""; position: absolute; left: -7px; top: 22px;
+  width: 12px; height: 12px; border-radius: var(--r-full);
+  background: var(--bg); border: 2px solid var(--accent-2);
+}
+.tips li::before { border-color: var(--warning); }
+
+/* Tablas de valores */
+.tables { display: grid; grid-template-columns: 1fr; gap: var(--sp-4); margin: var(--sp-5) 0; }
+.tile-table {
+  background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: var(--sp-4) var(--sp-5);
+}
+.tile-table h3 {
+  font-family: var(--font-display); font-size: var(--fs-md);
+  margin: 0 0 var(--sp-3); color: var(--accent);
+}
+.tile-table table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.tile-table th, .tile-table td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--border); }
+.tile-table th { color: var(--text-muted); font-weight: 600; font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.05em; }
+.tile-table tbody tr:last-child td { border-bottom: none; }
+.tile-table td:first-child {
+  width: 64px; font-family: var(--font-display); font-weight: 700;
+  font-size: var(--fs-lg); color: var(--accent-2);
+}
+
+@media (min-width: 700px) {
+  .tables { grid-template-columns: 1fr 1fr; }
+}
 
 /* ───── Footer ───── */
 .site-footer { padding: var(--sp-6) var(--container-pad); border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: var(--fs-sm); margin-top: var(--sp-8); }
