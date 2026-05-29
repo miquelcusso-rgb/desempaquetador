@@ -86,32 +86,69 @@ a:hover { color: var(--accent-2); }
 /* ───── Header ───── */
 .site-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: var(--sp-4) var(--container-pad);
   border-bottom: 1px solid var(--border);
-  max-width: var(--container-max);
+  max-width: 880px;
   margin: 0 auto;
-  gap: var(--sp-3);
+  gap: var(--sp-5);
   flex-wrap: wrap;
 }
 .brand {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--fs-xl);
+  font-size: clamp(22px, 3.6vw, 28px);
   letter-spacing: -0.01em;
   color: var(--text);
   text-decoration: none;
+  line-height: 1;
 }
 .brand:hover { color: var(--accent-strong); text-decoration: none; }
-.site-nav { display: flex; gap: var(--sp-4); flex-wrap: wrap; }
-.site-nav a { color: var(--text-muted); font-size: var(--fs-sm); font-weight: 600; text-decoration: none; }
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3) var(--sp-5);
+  margin: 0;
+  padding: 0;
+}
+.site-nav a {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 4px;
+  /* Margin fallback in case gap is overridden somewhere */
+  margin: 0;
+  white-space: nowrap;
+}
+.site-nav a + a { margin-left: 0; }
 .site-nav a:hover { color: var(--accent-strong); }
 
-main { max-width: var(--container-max); margin: 0 auto; padding: var(--sp-6) var(--container-pad) var(--sp-8); }
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: var(--sp-7) var(--container-pad) var(--sp-8);
+}
 
 /* ───── Hero ───── */
-.hero { text-align: center; margin-bottom: var(--sp-6); }
+.hero { text-align: center; margin-bottom: var(--sp-7); padding: var(--sp-5) 0 var(--sp-3); }
+.hero .overline,
+.hero a.brand.overline {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  margin-bottom: var(--sp-4);
+  text-decoration: none;
+  line-height: 1;
+}
+.hero a.brand.overline:hover { color: var(--accent-2); }
 .hero h1 {
   font-family: var(--font-display);
   font-size: clamp(30px, 7vw, 48px);
@@ -224,7 +261,7 @@ kbd {
 .examples-label { font-size: var(--fs-sm); color: var(--text-muted); }
 .pill {
   border: 1px solid var(--border); background: var(--bg);
-  color: var(--text); padding: 8px 14px; min-height: 40px;
+  color: var(--text); padding: 10px 18px; min-height: 44px;
   border-radius: var(--r-full); font-family: var(--font-mono);
   font-size: var(--fs-sm); font-weight: 600; cursor: pointer;
   transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
@@ -322,35 +359,65 @@ kbd {
 .show-more:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
 
 /* ───── Prosa / SEO ───── */
-.prose { max-width: 720px; margin: var(--sp-8) auto 0; }
-.prose h2 { font-family: var(--font-display); font-weight: 700; margin-bottom: var(--sp-4); color: var(--text); font-size: clamp(24px, 5vw, 32px); letter-spacing: -0.01em; }
+.prose { max-width: 680px; margin: var(--sp-8) auto 0; }
+.prose h2 { font-family: var(--font-display); font-weight: 700; margin-bottom: var(--sp-5); color: var(--text); font-size: clamp(24px, 5vw, 32px); letter-spacing: -0.01em; text-align: center; }
 .prose h3 { font-family: var(--font-display); font-size: var(--fs-lg); margin-top: var(--sp-5); margin-bottom: var(--sp-2); color: var(--text); font-weight: 600; }
-.prose p { color: var(--text-muted); line-height: 1.7; font-size: var(--fs-base); }
+.prose p { color: var(--text-muted); line-height: 1.75; font-size: var(--fs-base); margin-bottom: var(--sp-4); }
 .prose strong { color: var(--text); font-weight: 700; }
 .prose em { color: var(--text); font-style: normal; font-weight: 600; background: var(--bg-elevated-2); padding: 0 4px; border-radius: 3px; }
 
-/* Listas estructuradas (steps, juegos, tips) */
-.steps, .games, .tips { padding: 0; margin: 0 0 var(--sp-4); list-style: none; }
+/* Listas estructuradas (steps, juegos, tips)
+   Layout en 2 columnas (bullet | texto) para evitar solapes. */
+.steps, .games, .tips {
+  padding: 0;
+  margin: var(--sp-4) 0 var(--sp-5);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
 .steps li, .games li, .tips li {
-  position: relative; padding: var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-7);
-  color: var(--text-muted); line-height: 1.7; font-size: var(--fs-base);
-  border-left: 2px solid var(--border); margin-left: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: var(--fs-base);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
 }
 .steps li strong, .games li strong, .tips li strong { color: var(--text); }
+
 .steps { counter-reset: step; }
 .steps li { counter-increment: step; }
 .steps li::before {
-  content: counter(step); position: absolute; left: -18px; top: var(--sp-3);
-  width: 36px; height: 36px; border-radius: var(--r-full);
-  background: var(--accent); border: 2px solid var(--accent); color: var(--accent-on);
-  font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base);
-  display: flex; align-items: center; justify-content: center;
+  content: counter(step);
+  width: 40px; height: 40px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--accent-on);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 .games li::before, .tips li::before {
-  content: ""; position: absolute; left: -8px; top: 24px;
-  width: 14px; height: 14px; border-radius: var(--r-full);
-  background: var(--bg); border: 3px solid var(--accent-2);
+  content: "";
+  width: 14px; height: 14px;
+  border-radius: var(--r-full);
+  background: var(--bg);
+  border: 3px solid var(--accent-2);
+  margin-top: 10px;
+  margin-left: 6px;
+  flex-shrink: 0;
 }
 .tips li::before { border-color: var(--warning); }
 
