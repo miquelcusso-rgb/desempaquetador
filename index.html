@@ -150,6 +150,16 @@
           <button type="button" class="pill" data-fill="zapatero">zapatero</button>
           <button type="button" class="pill" data-fill="abcdefg">abcdefg</button>
         </div>
+
+        <div class="random-row" aria-label="Generador aleatorio">
+          <span class="examples-label">Aleatorio:</span>
+          <div class="rand-stepper" role="group" aria-label="Número de letras">
+            <button type="button" class="rand-step" id="rand-minus" aria-label="Una letra menos">−</button>
+            <input id="rand-count" type="number" min="1" max="15" value="7" inputmode="numeric" aria-label="Cantidad de letras" />
+            <button type="button" class="rand-step" id="rand-plus" aria-label="Una letra más">+</button>
+          </div>
+          <button type="button" id="rand-btn" class="rand-btn">Generar letras al azar</button>
+        </div>
       </div>
 
       <div class="mode-row">

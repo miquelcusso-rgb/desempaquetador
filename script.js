@@ -324,6 +324,58 @@
     });
   });
 
+  // ───── Randomizer ─────
+  // Distribución aproximada de las 100 fichas FISE (Scrabble español) + 2 comodines.
+  var TILE_WEIGHTS = {
+    a:12, e:12, o:9, s:7, i:6, u:5, n:5, r:5, l:4, t:4,
+    d:5, g:2, c:4, b:2, m:2, p:2,
+    h:2, f:1, v:1, y:1, q:1, j:1, "ñ":1, x:1, z:1,
+    "?":2
+  };
+  function buildBag() {
+    var bag = [];
+    for (var l in TILE_WEIGHTS) if (TILE_WEIGHTS.hasOwnProperty(l)) {
+      for (var i = 0; i < TILE_WEIGHTS[l]; i++) bag.push(l);
+    }
+    return bag;
+  }
+  function randomLetters(n) {
+    var bag = buildBag();
+    // Fisher-Yates parcial: extrae sin reemplazo
+    for (var i = bag.length - 1; i > 0 && i > bag.length - 1 - n; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = bag[i]; bag[i] = bag[j]; bag[j] = tmp;
+    }
+    return bag.slice(bag.length - n, bag.length).join("");
+  }
+  var randCount = document.getElementById("rand-count");
+  var randMinus = document.getElementById("rand-minus");
+  var randPlus  = document.getElementById("rand-plus");
+  var randBtn   = document.getElementById("rand-btn");
+  function clampCount() {
+    var n = parseInt(randCount.value, 10);
+    if (isNaN(n) || n < 1) n = 1;
+    if (n > 15) n = 15;
+    randCount.value = n;
+    return n;
+  }
+  randMinus.addEventListener("click", function () {
+    randCount.value = Math.max(1, (parseInt(randCount.value, 10) || 7) - 1);
+    clampCount();
+  });
+  randPlus.addEventListener("click", function () {
+    randCount.value = Math.min(15, (parseInt(randCount.value, 10) || 7) + 1);
+    clampCount();
+  });
+  randCount.addEventListener("change", clampCount);
+  randBtn.addEventListener("click", function () {
+    var n = clampCount();
+    el.letters.value = randomLetters(n);
+    el.clear.hidden = false;
+    el.letters.focus();
+    run();
+  });
+
   // Delegación: copiar palabra al tocarla / mostrar más
   el.results.addEventListener("click", function (e) {
     var more = e.target.closest("#show-more");

@@ -366,6 +366,73 @@ kbd {
   background: var(--accent-soft);
 }
 
+/* Randomizer */
+.random-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px dashed var(--border);
+}
+.rand-stepper {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--bg);
+}
+.rand-step {
+  border: none;
+  background: var(--bg-sunken);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  width: 40px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: background var(--t-fast);
+}
+.rand-step:hover { background: var(--border); }
+.rand-stepper input {
+  width: 56px;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text);
+  padding: 0;
+  -moz-appearance: textfield;
+}
+.rand-stepper input::-webkit-inner-spin-button,
+.rand-stepper input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.rand-btn {
+  border: 2px solid var(--cta);
+  background: var(--cta);
+  color: #FFFFFF;
+  padding: 10px 18px;
+  min-height: 44px;
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+.rand-btn:hover { background: var(--cta-strong); border-color: var(--cta-strong); }
+.rand-btn:active { transform: scale(0.97); }
+@media (prefers-color-scheme: dark) {
+  .rand-btn { color: var(--on-accent); }
+}
+
 /* Modo de puntuación */
 .mode-row {
   display: flex; align-items: center;
@@ -608,7 +675,7 @@ h3 {
   border-radius: var(--r-sm);
 }
 
-/* Listas con bullet en columna propia → IMPOSIBLE solapar texto */
+/* Listas con bullet absoluto → texto fluye normal en flujo en línea */
 .steps, .games, .tips {
   list-style: none;
   padding: 0;
@@ -618,16 +685,13 @@ h3 {
   gap: var(--sp-3);
 }
 .steps li, .games li, .tips li {
-  display: grid;
-  grid-template-columns: 36px 1fr;
-  align-items: start;
-  gap: var(--sp-3);
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
-  padding: var(--sp-3) var(--sp-4);
+  padding: var(--sp-3) var(--sp-4) var(--sp-3) 64px;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 .steps li strong, .games li strong, .tips li strong {
   color: var(--text);
@@ -637,29 +701,35 @@ h3 {
 .steps li { counter-increment: step; }
 .steps li::before {
   content: counter(step);
-  grid-column: 1;
-  width: 32px; height: 32px;
+  position: absolute;
+  left: var(--sp-4);
+  top: var(--sp-3);
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--accent);
   color: var(--on-accent);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--fs-sm);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.steps li > *:not(::before) { grid-column: 2; }
 
+.games li, .tips li {
+  padding-left: 44px;
+}
 .games li::before, .tips li::before {
   content: "";
-  grid-column: 1;
-  width: 14px; height: 14px;
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--bg);
   border: 3px solid var(--cta);
-  margin-top: 8px;
-  margin-left: 10px;
-  flex-shrink: 0;
 }
 .tips li::before { border-color: var(--warning); }
 
