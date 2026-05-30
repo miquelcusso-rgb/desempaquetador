@@ -36,7 +36,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" />
 
 <script type="application/ld+json">
 {
@@ -95,29 +95,37 @@
 </head>
 <body>
 
+<a href="#contenido" class="sr-only">Saltar al contenido</a>
+
 <header class="site-header">
-  <nav class="site-nav" aria-label="Navegación principal">
-    <a href="#valores">Puntos</a>
-    <a href="#como-usar">Cómo usar</a>
-    <a href="#juegos">Juegos</a>
-    <a href="#faq">FAQ</a>
-  </nav>
+  <div class="wrap">
+    <a href="/" class="brand">Desempaquetador</a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#valores">Puntos</a>
+      <a href="#como-usar">Cómo usar</a>
+      <a href="#juegos">Juegos</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
 </header>
 
-<main>
+<main id="contenido">
   <section class="hero">
-    <a href="/" class="brand overline">Desempaquetador</a>
-    <h1>Buscador de palabras en español al instante</h1>
-    <p class="intro">Resuelve <strong>anagramas</strong> y encuentra todas las palabras que puedes formar con tus letras. Trucos para <strong>Apalabrados</strong>, <strong>Scrabble&nbsp;(FISE)</strong>, <strong>Wordle</strong>, <strong>Words with Friends</strong> y <strong>Wordfeud</strong>.</p>
-    <ul class="badges" aria-label="Características destacadas">
-      <li><span class="dot"></span> 100 % en tu navegador</li>
-      <li><span class="dot"></span> +635 000 palabras</li>
-      <li><span class="dot"></span> Sin anuncios, sin registro</li>
-    </ul>
+    <div class="wrap">
+      <h1>Buscador de palabras en español al instante</h1>
+      <p class="intro">Resuelve <strong>anagramas</strong> y encuentra todas las palabras que puedes formar con tus letras. Trucos para <strong>Apalabrados</strong>, <strong>Scrabble&nbsp;(FISE)</strong>, <strong>Wordle</strong>, <strong>Words with Friends</strong> y <strong>Wordfeud</strong>.</p>
+      <ul class="badges" aria-label="Características destacadas">
+        <li><span class="dot"></span> 100 % en tu navegador</li>
+        <li><span class="dot"></span> +635 000 palabras</li>
+        <li><span class="dot"></span> Sin anuncios, sin registro</li>
+      </ul>
+    </div>
   </section>
 
-  <section class="tool" aria-label="Buscador de palabras y anagramas">
-    <form id="solver-form" autocomplete="off" novalidate>
+  <section aria-label="Buscador de palabras y anagramas">
+    <div class="wrap">
+      <div class="tool">
+        <form id="solver-form" autocomplete="off" novalidate>
       <div class="rack">
         <label for="letters" class="rack-label">Tus letras <span class="hint">(usa <kbd>?</kbd> para un comodín)</span></label>
         <div class="rack-input">
@@ -189,12 +197,15 @@
         <span id="status-text">Cargando diccionario…</span>
       </div>
     </div>
-    <noscript>
-      <p class="empty"><strong>Activa JavaScript para usar el buscador</strong>Desempaquetador resuelve los anagramas en tu propio navegador, sin enviar datos a ningún servidor, por lo que necesita JavaScript activado.</p>
-    </noscript>
+        <noscript>
+          <p class="empty"><strong>Activa JavaScript para usar el buscador</strong>Desempaquetador resuelve los anagramas en tu propio navegador, sin enviar datos a ningún servidor, por lo que necesita JavaScript activado.</p>
+        </noscript>
+      </div><!-- /.tool -->
+    </div><!-- /.wrap -->
   </section>
 
-  <section id="valores" class="prose">
+  <section id="valores" class="section">
+    <div class="wrap">
     <h2>Valor de las fichas en español</h2>
     <p>El modo Scrabble usa los valores oficiales <strong>FISE</strong> (Federación Internacional de Scrabble en Español). El modo Apalabrados usa los valores habituales del juego de Etermax. Los <strong>comodines</strong> (fichas en blanco) suman <strong>0 puntos</strong> en ambos.</p>
 
@@ -231,9 +242,11 @@
         </table>
       </div>
     </div>
+    </div><!-- /.wrap -->
   </section>
 
-  <section id="como-usar" class="prose">
+  <section id="como-usar" class="section">
+    <div class="wrap">
     <h2>Cómo usar el buscador</h2>
     <ol class="steps">
       <li><strong>Escribe tus letras.</strong> Hasta 15 letras del español. Las tildes se ignoran (como en las fichas reales); la Ñ sí cuenta como letra propia.</li>
@@ -242,9 +255,11 @@
       <li><strong>Filtra</strong> por longitud, palabra que <em>contenga</em> una sílaba, que <em>empiece</em> o <em>acabe</em> por unas letras, o por un <em>patrón</em> con huecos (<kbd>c_s_</kbd>).</li>
       <li><strong>Toca una palabra</strong> para copiarla al portapapeles.</li>
     </ol>
+    </div><!-- /.wrap -->
   </section>
 
-  <section id="juegos" class="prose">
+  <section id="juegos" class="section">
+    <div class="wrap">
     <h2>Para qué juegos sirve</h2>
     <p>El mismo diccionario en español sirve para casi todos los juegos de palabras populares en España y Latinoamérica:</p>
     <ul class="games">
@@ -255,9 +270,11 @@
       <li><strong>Wordfeud</strong> y <strong>Angry Words</strong>.</li>
       <li><strong>Crucigramas</strong>, sopas de letras y juegos del ahorcado.</li>
     </ul>
+    </div><!-- /.wrap -->
   </section>
 
-  <section class="prose">
+  <section class="section">
+    <div class="wrap">
     <h2>Trucos rápidos para ganar</h2>
     <ul class="tips">
       <li><strong>Reserva los comodines para casillas multiplicadoras.</strong> Una ficha en blanco vale 0 puntos, pero sobre una casilla de «doble palabra» o «triple palabra» multiplica todo el resto.</li>
@@ -265,9 +282,11 @@
       <li><strong>Aprende palabras útiles de 2 y 3 letras.</strong> Sirven para abrir o cerrar el tablero y muchas valen más de lo que parecen (oh, ja, ex).</li>
       <li><strong>Palabras con Q sin U son válidas en FISE</strong> en muy pocos casos; en cambio, en Apalabrados la Q vale 8 puntos, así que vigílala.</li>
     </ul>
+    </div><!-- /.wrap -->
   </section>
 
-  <section id="faq" class="prose">
+  <section id="faq" class="section">
+    <div class="wrap">
     <h2>Preguntas frecuentes</h2>
     <h3>¿Cómo se usan los comodines?</h3>
     <p>Escribe <kbd>?</kbd> (o un espacio) por cada ficha en blanco. El comodín representa cualquier letra y suma 0 puntos.</p>
@@ -279,11 +298,14 @@
     <p>Sí. Para Wordle y Palabreto los filtros «contiene», «empieza por», «acaba en» y «patrón» son ideales. Para Words with Friends sirve el modo Apalabrados (mismos valores).</p>
     <h3>¿Envía mis letras a algún servidor?</h3>
     <p>No. Todo el cálculo ocurre en tu navegador. Tus letras nunca salen del dispositivo y la página funciona offline una vez cargado el diccionario.</p>
+    </div><!-- /.wrap -->
   </section>
 </main>
 
 <footer class="site-footer">
-  <p>&copy; <span id="year"></span> Desempaquetador · hecho por <a href="https://miquelcusso-rgb.github.io" rel="noopener">miquelcusso</a></p>
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Desempaquetador · hecho por <a href="https://miquelcusso-rgb.github.io" rel="noopener">miquelcusso</a></p>
+  </div>
 </footer>
 
 <script src="script.js" defer></script>
